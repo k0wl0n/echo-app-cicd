@@ -4,6 +4,19 @@
       tags:
         - stg-v.*
         - prod-v.*
+
+  permissions:
+    contents: write  # This grants write permission to push changes`
+
+    # Steps to Enable Push Permissions for GitHub Actions:
+    # Set the Workflow Permissions in the GitHub Repository Settings:
+
+    # Go to your repository's Settings → Actions → General.
+    # Scroll down to the Workflow permissions section.
+    # Select Read and write permissions (the default is usually just "Read permissions").
+    # Make sure the checkbox for Allow GitHub Actions to create and approve pull requests is also checked if you intend to use pull requests.
+    # Click Save.
+
   jobs:
     Build:
       name: Build
