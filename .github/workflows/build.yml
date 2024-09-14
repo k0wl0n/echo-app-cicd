@@ -49,20 +49,28 @@
         #     git push origin ${{ github.ref_name }}
 
         - name: Push Kustomize manifests to GitOps repo
+          env:
+            REPO_TOKEN: ${{ secrets.REPO_TOKEN }}  # Make sure the token is available
           run: |
+
+            # Clone the repository with authentication
             git clone https://${{ secrets.REPO_TOKEN }}@github.com/k0wl0n/monorepo-echo-application.git
             cd monorepo-echo-application
             
+            # Set Git identity with your email and a generic username
             git config user.email "wahyuanggana1@gmail.com"
             git config user.name "GitHub Actions"
             
+            # Ensure the directories and files are correct
             pwd 
             tree -d
             
+            # Copy new files and commit changes
             cp -r ../deploy ./overlay/production/echo-app-cicd
             git add .
             git commit -m "Deploy to tag ${{ github.ref_name }}"
             
+            # Push the changes using REPO_TOKEN for authentication
             git push https://${{ secrets.REPO_TOKEN }}@github.com/k0wl0n/monorepo-echo-application.git
 
         - name: Run Trivy vulnerability scanner
