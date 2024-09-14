@@ -60,7 +60,7 @@
             API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
           with:
             source-directory: 'deploy'
-            target-directory: 'overlay/production/${{ secrets.REPO_NAME }}'
+            target-directory: 'overlay/${{ secrets.REPO_NAME }}/${{ secrets.REPO_NAME }}'
             destination-github-username: 'k0wl0n'
             destination-repository-name: 'monorepo-echo-application'
             user-email: wahyuanggana1@gmail.com
