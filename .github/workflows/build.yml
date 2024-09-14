@@ -51,7 +51,10 @@
             
             # Update the image tag with the current GitHub ref name (tag)
             sed -i 's/newTag:.*/newTag: '"${{ github.ref_name }}"'/g' deploy/kustomization.yaml
-            
+
+            # Update the host in VirtualService based on environment
+            sed -i 's/go-echo\.apps\.kowlon\.my\.id/go-echo-'"${{ env.ENVIRONMENT }}"'.apps.kowlon.my.id/g' deploy/virtual-service.yaml
+          
             cat deploy/kustomization.yaml
 
         - name: Pushes to another repository

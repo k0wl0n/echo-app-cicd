@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+- virtual-service.yaml
 namespace: staging
 images:
 - name: kowlon/go-echo
