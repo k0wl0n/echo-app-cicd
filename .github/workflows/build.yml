@@ -40,13 +40,25 @@
             sed -i 's/newTag:.*/newTag: '"${{ github.ref_name }}"'/g' deploy/kustomization.yaml
             cat deploy/kustomization.yaml
         
-        - name: Commit and push updated kustomization.yaml
+        # - name: Commit and push updated kustomization.yaml
+        #   run: |
+        #     git config --global user.email "actions@github.com"
+        #     git config --global user.name "GitHub Actions"
+        #     git add deploy/kustomization.yaml
+        #     git commit -m "Update Kustomize image tag to ${{ github.ref_name }}"
+        #     git push origin ${{ github.ref_name }}
+
+        - name: Push Kustomize manifests to GitOps repo
           run: |
-            git config --global user.email "actions@github.com"
-            git config --global user.name "GitHub Actions"
-            git add deploy/kustomization.yaml
-            git commit -m "Update Kustomize image tag to ${{ github.ref_name }}"
-            git push origin ${{ github.ref_name }}
+            git config --global user.email "wahyuanggana1@gmail.com"
+            git config --global user.name "wahyu anggana"
+            git clone https://${{ secrets.REPO_TOKEN }}@github.com/k0wl0n/monorepo-echo-application.git
+            cd monorepo-echo-application
+            mkdir -p /overlay/production/monorepo-echo-application
+            cp -r ../deploy ./overlay/production/monorepo-echo-application
+            git add .
+            git commit -m "Deploy to tag $IMAGE_TAG"
+            git push
 
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@0.20.0
