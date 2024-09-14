@@ -63,7 +63,7 @@
             git add .
             git commit -m "Deploy to tag ${{ github.ref_name }}"
             
-            git push
+            git push https://${{ secrets.REPO_TOKEN }}@github.com/k0wl0n/monorepo-echo-application.git
 
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@0.20.0
