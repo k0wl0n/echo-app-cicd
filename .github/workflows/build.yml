@@ -51,12 +51,12 @@
         - name: Push Kustomize manifests to GitOps repo
           run: |
             git config --global user.email "wahyuanggana1@gmail.com"
-            git config --global user.name "wahyu anggana"
+            git config --global user.name "k0wl0n"
             git clone https://${{ secrets.REPO_TOKEN }}@github.com/k0wl0n/monorepo-echo-application.git
             cd monorepo-echo-application
             pwd 
             tree -d
-            cp -r ../deploy ./overlay/production/monorepo-echo-application
+            cp -r ../deploy ./overlay/production/echo-app-cicd
             git add .
             git commit -m "Deploy to tag $IMAGE_TAG"
             git push
