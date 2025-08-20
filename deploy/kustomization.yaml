@@ -7,5 +7,5 @@ resources:
 namespace: staging
 images:
 - name: kowlon/go-echo
-  newName: 490004610217.dkr.ecr.ap-southeast-1.amazonaws.com/echo-app-cicd
-  newTag: stg-v.0.0.2
+  newName: ragilarfan/golangechov2
+  newTag: v1
